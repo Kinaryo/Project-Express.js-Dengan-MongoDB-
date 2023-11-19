@@ -1,0 +1,36 @@
+const path = require('path')
+const express = require('express');
+const { default: mongoose } = require('mongoose');
+const app = express();
+
+
+// step 2 models 
+const Product = require('./models/product')
+
+
+// import mongoose   from 'mongoose'; 
+mongoose.connect('mongodb://127.0.0.1/db_shop').then((result)=>{
+    console.log('connect to database MongoDB')
+}).catch((err)=>{
+    console.log
+})
+
+app.set('views',path.join(__dirname,'views'))
+app.set('view engine','ejs')
+
+
+
+app.get('/', (req,res)=>{
+    res.send('hello word')
+})
+
+
+// tambahan selanjutanya step 3 
+app.get('/products', async (req,res)=>{
+    const products = await Product.find({})
+    res.render('products/index',{products})
+})
+
+app.listen(3000,() =>{
+    console.log('shop app listening on http://127.0.0.1:3000')
+})

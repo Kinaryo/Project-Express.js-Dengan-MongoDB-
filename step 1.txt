@@ -1,0 +1,24 @@
+const path = require('path')
+const express = require('express');
+const { default: mongoose } = require('mongoose');
+const app = express();
+
+// import mongoose   from 'mongoose'; 
+mongoose.connect('mongodb://127.0.0.1/db_shop').then((result)=>{
+    console.log('connect to database MongoDB')
+}).catch((err)=>{
+    console.log
+})
+
+app.set('views',path.join(__dirname,'views '))
+app.set('view engine','ejs')
+
+app.listen(3000,() =>{
+    console.log('shop app listening on http://127.0.0.1:3000')
+})
+
+app.get('/', (req,res)=>{
+    res.send('hello word')
+})
+
+
